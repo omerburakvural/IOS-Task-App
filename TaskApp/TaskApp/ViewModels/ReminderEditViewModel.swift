@@ -59,7 +59,7 @@ class ReminderEditViewModel {
         reminder?.note ?? ""
     }
     
-    func saveReminder (withReminderTitle reminderTitle: String?, andFlagged isFlagged: Bool, andScheduled isScheduled: Bool, andDate today: Date, andScheduledDate scheduledDate: Date, andIsDoneFlagged isDoneSwitch: Bool, andCategory categoryName: String, andWithNote: String) -> ReminderSaveResults {
+    func saveReminder (withReminderTitle reminderTitle: String, andFlagged isFlagged: Bool, andScheduled isScheduled: Bool, andDate today: Date, andScheduledDate scheduledDate: Date, andIsDoneFlagged isDoneSwitch: Bool, andCategory categoryName: String, andWithNote: String) -> ReminderSaveResults {
         
         var isNewReminder = false
         
@@ -78,6 +78,20 @@ class ReminderEditViewModel {
         reminder?.category = categoryName
         reminder?.note = andWithNote
         
+        let content = UNMutableNotificationContent()
+        content.title = reminderTitle
+        content.sound = .default
+        content.body = scheduledDate.toString(dateFormat: "dd/MM/YYYY HH:MM")
+        
+        let targetDate = scheduledDate
+        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate), repeats: false)
+        let request = UNNotificationRequest(identifier: reminderTitle, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if error != nil {
+                print("something went wrong")
+            }
+        })
+        
         do {
             try viewContext.save()
             
@@ -90,7 +104,6 @@ class ReminderEditViewModel {
         } catch {
             return .error(error)
         }
-        
     }
     
     func deleteReminder (completion: () -> Void) {

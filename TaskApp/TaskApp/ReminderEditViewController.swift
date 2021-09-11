@@ -16,7 +16,7 @@ protocol ReminderEditViewDelegate {
     func reminderDeleted ()
 }
 
-class ReminderEditViewController: UIViewController, UITableViewDelegate{
+class ReminderEditViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate{
 
     var delegate: ReminderEditViewDelegate?
     var viewModel = ReminderEditViewModel()
@@ -24,6 +24,8 @@ class ReminderEditViewController: UIViewController, UITableViewDelegate{
     
     let today = Date()
     var scheduledDate = Date()
+    
+    public var completion: ((String, String, Date) -> Void)?
     
     @IBOutlet weak var tfTitle: UITextField!
     @IBOutlet weak var reminderNote: UITextView!
@@ -83,7 +85,6 @@ class ReminderEditViewController: UIViewController, UITableViewDelegate{
             deleteReminderButton.isHidden = true
         }
         
-  
     }
     
     @IBAction func deleteReminderButtonClicked(_ sender: Any) {
@@ -121,7 +122,7 @@ class ReminderEditViewController: UIViewController, UITableViewDelegate{
     }
     
     @IBAction func reminderEditSaveClicked(_ sender: Any) {
-        let result = viewModel.saveReminder(withReminderTitle: tfTitle.text, andFlagged: isFlagged.isOn, andScheduled: isDateActive.isOn, andDate: today, andScheduledDate: scheduledDate, andIsDoneFlagged: isDoneSwitch.isOn, andCategory: pickedPickerTextField.text!, andWithNote: reminderNote.text! )
+        let result = viewModel.saveReminder(withReminderTitle: tfTitle.text!, andFlagged: isFlagged.isOn, andScheduled: isDateActive.isOn, andDate: today, andScheduledDate: scheduledDate, andIsDoneFlagged: isDoneSwitch.isOn, andCategory: pickedPickerTextField.text!, andWithNote: reminderNote.text! )
         self.dismiss(animated: true) {
             switch (result) {
             case .added(let newreminder):
@@ -131,6 +132,14 @@ class ReminderEditViewController: UIViewController, UITableViewDelegate{
             case .error(let error):
                 print(error.localizedDescription)
             }
+        }
+        
+        let bb: String? = datePicker.date.toString(dateFormat: "dd/MM/YYYY HH:MM")
+        
+        if let titleText = tfTitle.text, !titleText.isEmpty,
+           let bodyText = bb, !bodyText.isEmpty {
+            let targetDate = datePicker.date
+            completion?(titleText, bodyText, targetDate)
         }
     }
     

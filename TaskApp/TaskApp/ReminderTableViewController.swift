@@ -23,15 +23,15 @@ class ReminderTableViewController: UIViewController, UISearchBarDelegate {
     var filteredReminders: [Reminder] = []
     
     var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
+        return searchController.searchBar.text?.isEmpty ?? true
     }
     
     var isFiltering: Bool {
-      return searchController.isActive && !isSearchBarEmpty
+        return searchController.isActive && !isSearchBarEmpty
     }
     
     let searchController = UISearchController(searchResultsController: nil)
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         reminderTableView.dataSource = self
@@ -42,7 +42,7 @@ class ReminderTableViewController: UIViewController, UISearchBarDelegate {
         searchController.searchBar.placeholder = "Find a reminder.."
         navigationItem.searchController = searchController
         definesPresentationContext = true
-
+        
         if isFiltering{
             self.title = "Search Results"
         }
@@ -87,8 +87,8 @@ class ReminderTableViewController: UIViewController, UISearchBarDelegate {
     func filterContentForSearchText(_ searchText: String) {
         filteredReminders = viewModel.reminders.filter { (reminder: Reminder) -> Bool in
             return (reminder.reminderTitle?.lowercased().contains(searchText.lowercased()))!
-      }
-      reminderTableView.reloadData()
+        }
+        reminderTableView.reloadData()
     }
 }
 
@@ -154,7 +154,7 @@ extension ReminderTableViewController: UITableViewDataSource {
             if (reminder.isScheduled){
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "reminderCell") as? ReminderTableCell {
                     if (reminder.isDone){
-                    cell.reminderCellTitle.textColor = UIColor.systemGray
+                        cell.reminderCellTitle.textColor = UIColor.systemGray
                     }else{
                         cell.reminderCellTitle.textColor = UIColor.label
                     }
@@ -199,11 +199,11 @@ extension ReminderTableViewController: UITableViewDataSource {
             isRowHidden = false
             if let cell = tableView.dequeueReusableCell(withIdentifier: "reminderCell") as? ReminderTableCell {
                 if (reminder.isDone){
-                cell.reminderCellTitle.textColor = UIColor.systemGray
+                    cell.reminderCellTitle.textColor = UIColor.systemGray
                 }else{
                     cell.reminderCellTitle.textColor = UIColor.label
                 }
-
+                
                 cell.delegate = self
                 cell.viewModel = CellViewModel(reminder: reminder)
                 return cell
@@ -214,7 +214,7 @@ extension ReminderTableViewController: UITableViewDataSource {
             isRowHidden = false
             if let cell = tableView.dequeueReusableCell(withIdentifier: "reminderCell") as? ReminderTableCell {
                 if (reminder.isDone){
-                cell.reminderCellTitle.textColor = UIColor.systemGray
+                    cell.reminderCellTitle.textColor = UIColor.systemGray
                 }else{
                     cell.reminderCellTitle.textColor = UIColor.label
                 }
