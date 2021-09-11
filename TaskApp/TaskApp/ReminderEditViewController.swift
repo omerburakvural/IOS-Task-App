@@ -133,14 +133,6 @@ class ReminderEditViewController: UIViewController, UITableViewDelegate, UITextF
                 print(error.localizedDescription)
             }
         }
-        
-        let bb: String? = datePicker.date.toString(dateFormat: "dd/MM/YYYY HH:MM")
-        
-        if let titleText = tfTitle.text, !titleText.isEmpty,
-           let bodyText = bb, !bodyText.isEmpty {
-            let targetDate = datePicker.date
-            completion?(titleText, bodyText, targetDate)
-        }
     }
     
     @IBAction func scheduledDatePicked(_ sender: Any) {
