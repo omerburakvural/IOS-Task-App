@@ -99,11 +99,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
         let application = UIApplication.shared
         print(withTitle)
         if(application.applicationState == .active){
-            //Uygulamanın aktif olduğu durum
+            print("Uygulamanın aktif olduğu durum")
         }
         if(application.applicationState == .inactive)
         {
-            //Uygulamanın kapalı olduğu durum
+            print("Uygulamanın kapalı olduğu durum")
         }
     }
     
