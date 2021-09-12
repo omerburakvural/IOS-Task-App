@@ -21,6 +21,6 @@ class ReminderTableCell: UITableViewCell {
             reminderCellTitle.text = viewModel.reminderTitle
         }
     }
-
+    
 }
 

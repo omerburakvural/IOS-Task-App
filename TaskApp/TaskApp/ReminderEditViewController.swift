@@ -17,7 +17,7 @@ protocol ReminderEditViewDelegate {
 }
 
 class ReminderEditViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate{
-
+    
     var delegate: ReminderEditViewDelegate?
     var viewModel = ReminderEditViewModel()
     var viewModel2 = MainViewModel()
@@ -174,7 +174,6 @@ extension ReminderEditViewController: UIPickerViewDelegate, UIPickerViewDataSour
         self.thePickerView.isHidden = true
         pickerViewButton.isHidden = false
         self.pickedPickerTextField.text = viewModel2.getTask(atIndex: row).taskName
-        viewModel2.getTask(atIndex: row)
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -191,5 +190,5 @@ extension Date
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
-
+    
 }

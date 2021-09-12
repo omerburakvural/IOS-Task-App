@@ -38,31 +38,31 @@ class CellViewModel {
     var reminderDate: Date {
         reminder!.date!
     }
-
+    
     var reminderDoneDate: Date {
         reminder!.doneDate!
     }
-
+    
     var reminderScheduledDate: Date {
         reminder!.scheduledDate!
     }
-
+    
     var reminderIsDone: Bool {
         reminder!.isDone
     }
-
+    
     var reminderIsFlagged: Bool {
         reminder!.isFlagged
     }
-
+    
     var reminderIsScheduled: Bool {
         reminder!.isScheduled
     }
-
+    
     var reminderCategory: String {
         reminder!.category ?? ""
     }
-
+    
     var reminderTitle: String {
         reminder!.reminderTitle ?? ""
     }

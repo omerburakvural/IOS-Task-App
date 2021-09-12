@@ -121,10 +121,10 @@ class ListEditViewController: UIViewController {
         let alert = UIAlertController(title: "Delete Task", message: "Do you want to remove the Task?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
             self.viewModel.deleteTask {
-            self.dismiss(animated: true) {
-                self.delegate?.taskDeleted()
+                self.dismiss(animated: true) {
+                    self.delegate?.taskDeleted()
+                }
             }
-        }
         }))
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         self.present(alert, animated: true)

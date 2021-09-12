@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     @IBOutlet weak var todayView: UIView!
     @IBOutlet weak var scheduledView: UIView!
     @IBOutlet weak var allView: UIView!
@@ -40,7 +40,7 @@ class MainViewController: UIViewController {
         allButtonCount.text = reminderFilter(withIdentifier: "allButtonCount")
         flaggedButtonCount.text = reminderFilter(withIdentifier: "flaggedButtonCount")
     }
-
+    
     @IBAction func todayButtonClicked(_ sender: Any) {
         if let vc = UIStoryboard.createViewController(fromStoryboard: "Main", forViewcontroller: .reminderTable) as? ReminderTableViewController {
             vc.title = "Today"
@@ -109,14 +109,14 @@ class MainViewController: UIViewController {
             
             if (index.isFlagged){
                 if (index.isScheduled){
-                   if ((Date().toString(dateFormat: "yyyy-MM-dd")) == (index.scheduledDate?.toString(dateFormat: "yyyy-MM-dd"))){
-                    todayCount = todayCount + 1
+                    if ((Date().toString(dateFormat: "yyyy-MM-dd")) == (index.scheduledDate?.toString(dateFormat: "yyyy-MM-dd"))){
+                        todayCount = todayCount + 1
                     }
                     scheduledCount += 1
                 }
                 flaggedCount += 1
                 totalCount += 1
-               
+                
             }else if (index.isScheduled){
                 if ((Date().toString(dateFormat: "yyyy-MM-dd")) == (index.scheduledDate?.toString(dateFormat: "yyyy-MM-dd"))){
                     todayCount = todayCount + 1
@@ -157,7 +157,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let task = viewModel.getTask(atIndex: indexPath.item)
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell") as? MainTableCell {
-
+            
             cell.mainTaskReminderCount.text = viewModel2.getReminderCount(taskNameTitle: viewModel.getTask(atIndex: indexPath.item).taskName!)
             cell.delegate = self
             cell.viewModel = CellViewModel(task: task)
@@ -171,7 +171,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             vc.title = self.viewModel.getTask(atIndex: indexPath.item).taskName
             self.navigationController?.replaceCurrentView(withViewController: vc)
         }
-    
+        
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

@@ -55,7 +55,7 @@ class ListEditViewModel {
         task?.taskLogo = taskLogo
         task?.taskColor = taskColor
         task?.reminderCount = reminderCount!
-
+        
         do {
             try viewContext.save()
             
@@ -86,5 +86,5 @@ class ListEditViewModel {
             } catch {}
         }
     }
-
+    
 }
