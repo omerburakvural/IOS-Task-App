@@ -96,26 +96,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
     }
     
     private func coordinateToSomeVC(withTitle: String){
-        let application = UIApplication.shared
-        print(withTitle)
-
-        if (application.applicationState == .active) {
-            guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "reminderEdit") as! ReminderEditViewController
-            controller.comingFromNotification(withTitle: withTitle)
-            let navController = UINavigationController(rootViewController: controller)
-            rootViewController.present(navController, animated: true, completion: { () -> Void in })
-        }
-        if (application.applicationState == .inactive) {
-            //uygulamanın tamamen kapatıldığı durum handle edilmeli
-            guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "reminderEdit") as! ReminderEditViewController
-            controller.comingFromNotification(withTitle: withTitle)
-            let navController = UINavigationController(rootViewController: controller)
-            rootViewController.present(navController, animated: true, completion: { () -> Void in })
-        }
+        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "reminderEdit") as! ReminderEditViewController
+        controller.comingFromNotification(withTitle: withTitle)
+        let navController = UINavigationController(rootViewController: controller)
+        rootViewController.present(navController, animated: true, completion: { () -> Void in })
     }
     
 }
