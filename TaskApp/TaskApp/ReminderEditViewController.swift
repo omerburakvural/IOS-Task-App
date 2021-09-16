@@ -21,7 +21,7 @@ class ReminderEditViewController: UIViewController, UITableViewDelegate, UITextF
     var delegate: ReminderEditViewDelegate?
     var viewModel = ReminderEditViewModel()
     var viewModel2 = MainViewModel()
-    var viewModel3 = ReminderViewModel()
+    var viewModel3 = ReminderTableViewModel()
     
     let today = Date()
     var scheduledDate = Date()
@@ -160,9 +160,9 @@ class ReminderEditViewController: UIViewController, UITableViewDelegate, UITextF
         }
     }
     
-    func comingFromNotification(withTitle: String){
+    func comingFromNotification(withID: String){
         for i in 0..<viewModel3.numberOfRows{
-            if(viewModel3.getReminders(atIndex: i).reminderTitle == withTitle){
+            if("\(String(describing: viewModel3.getReminderID(atIndex: i)))" == withID){
                 viewModel.reminder = viewModel3.getReminders(atIndex: i)
             }
         }

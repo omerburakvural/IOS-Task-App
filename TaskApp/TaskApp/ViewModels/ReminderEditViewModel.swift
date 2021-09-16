@@ -82,7 +82,7 @@ class ReminderEditViewModel {
         content.title = reminderTitle
         content.sound = .default
         content.body = scheduledDate.toString(dateFormat: "dd/MM/YYYY HH:mm")
-        //content.userInfo
+        content.targetContentIdentifier = "\(String(describing: reminder!.id))"
         
         let targetDate = scheduledDate
         let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate), repeats: false)

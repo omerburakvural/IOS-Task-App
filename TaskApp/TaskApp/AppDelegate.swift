@@ -90,16 +90,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.title
-        coordinateToSomeVC(withTitle: userInfo)
+        let reminderID = response.notification.request.content.targetContentIdentifier!
+        coordinateToSomeVC(withID: reminderID)
         completionHandler()
     }
     
-    private func coordinateToSomeVC(withTitle: String){
+    private func coordinateToSomeVC(withID: String){
         guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "reminderEdit") as! ReminderEditViewController
-        controller.comingFromNotification(withTitle: withTitle)
+        controller.comingFromNotification(withID: withID)
         let navController = UINavigationController(rootViewController: controller)
         rootViewController.present(navController, animated: true, completion: { () -> Void in })
     }

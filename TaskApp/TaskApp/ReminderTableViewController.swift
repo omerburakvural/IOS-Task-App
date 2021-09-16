@@ -9,7 +9,6 @@ import UIKit
 
 
 protocol ReminderTableViewControllerDelegate {
-    func getReminderTableTitle() -> String
     func reloadReminderTable()
 }
 
@@ -17,7 +16,7 @@ class ReminderTableViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var reminderTableView: UITableView!
     
-    var viewModel = ReminderViewModel()
+    var viewModel = ReminderTableViewModel()
     var isRowHidden  : Bool = false
     
     var filteredReminders: [Reminder] = []
@@ -74,10 +73,6 @@ class ReminderTableViewController: UIViewController, UISearchBarDelegate {
             let navController = UINavigationController(rootViewController: vc)
             self.present(navController, animated: true, completion: nil)
         }
-    }
-    
-    func getReminderTableTitle() -> String{
-        return self.title ?? ""
     }
     
     func reloadReminderTable(){
@@ -262,7 +257,7 @@ extension ReminderTableViewController: ReminderEditViewDelegate {
     }
 }
 
-extension ReminderTableViewController: ReminderViewModelDelegate {
+extension ReminderTableViewController: ReminderTableViewModelDelegate {
     func filterTableCells() {
         reminderTableView.reloadData()
     }

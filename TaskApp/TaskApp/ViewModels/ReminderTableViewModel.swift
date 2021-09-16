@@ -8,15 +8,15 @@
 import UIKit
 import CoreData
 
-protocol ReminderViewModelDelegate {
+protocol ReminderTableViewModelDelegate {
     func remindersUpdated ()
 }
 
-class ReminderViewModel {
+class ReminderTableViewModel {
     
     var reminders = [Reminder]()
     var reminder: Reminder?
-    var delegate: ReminderViewModelDelegate?
+    var delegate: ReminderTableViewModelDelegate?
     
     init() {
         loadReminders()
@@ -49,6 +49,10 @@ class ReminderViewModel {
     
     func setReminderCategory(atIndex: Int,category: String){
         reminders[atIndex].category = category
+    }
+    
+    func getReminderID(atIndex index: Int) -> ObjectIdentifier {
+        reminders[index].id
     }
     
     func getReminderCount(taskNameTitle: String) -> String{

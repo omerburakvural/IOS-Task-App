@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
     
     
     var viewModel = MainViewModel()
-    var viewModel2 = ReminderViewModel()
+    var viewModel2 = ReminderTableViewModel()
     
     override func viewDidLoad() {
         self.title = "TaskApp"
@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
     @IBAction func todayButtonClicked(_ sender: Any) {
         if let vc = UIStoryboard.createViewController(fromStoryboard: "Main", forViewcontroller: .reminderTable) as? ReminderTableViewController {
             vc.title = "Today"
-            vc.viewModel = ReminderViewModel()
+            vc.viewModel = ReminderTableViewModel()
             self.navigationController?.replaceCurrentView(withViewController: vc)
         }
     }
@@ -52,7 +52,7 @@ class MainViewController: UIViewController {
     @IBAction func scheduledButtonClicked(_ sender: Any) {
         if let vc = UIStoryboard.createViewController(fromStoryboard: "Main", forViewcontroller: .reminderTable) as? ReminderTableViewController {
             vc.title = "Scheduled Reminders"
-            vc.viewModel = ReminderViewModel()
+            vc.viewModel = ReminderTableViewModel()
             self.navigationController?.replaceCurrentView(withViewController: vc)
         }
     }
@@ -60,7 +60,7 @@ class MainViewController: UIViewController {
     @IBAction func allButtonClicked(_ sender: Any) {
         if let vc = UIStoryboard.createViewController(fromStoryboard: "Main", forViewcontroller: .reminderTable) as? ReminderTableViewController {
             vc.title = "All Reminders"
-            vc.viewModel = ReminderViewModel()
+            vc.viewModel = ReminderTableViewModel()
             self.navigationController?.replaceCurrentView(withViewController: vc)
         }
     }
@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
     @IBAction func flaggedButtonClicked(_ sender: Any) {
         if let vc = UIStoryboard.createViewController(fromStoryboard: "Main", forViewcontroller: .reminderTable) as? ReminderTableViewController {
             vc.title = "Flagged Reminders"
-            vc.viewModel = ReminderViewModel()
+            vc.viewModel = ReminderTableViewModel()
             self.navigationController?.replaceCurrentView(withViewController: vc)
         }
     }

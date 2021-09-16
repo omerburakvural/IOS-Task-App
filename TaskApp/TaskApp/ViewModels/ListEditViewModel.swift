@@ -16,7 +16,7 @@ enum TaskSaveResults {
 
 class ListEditViewModel {
     
-    var viewModel = ReminderViewModel()
+    var viewModel = ReminderTableViewModel()
     var task: Task?
     
     init (task: Task? = nil){
